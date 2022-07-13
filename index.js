@@ -23,25 +23,20 @@ function each(collection, action) {
 }
 module.exports.each = each;
 
-/** _.identity
-* Arguments:
-*   1) Any value
-* Objectives:
-*   1) Returns <value> unchanged
-* Examples:
-*   _.identity(5) === 5
-*   _.identity({a: "b"}) === {a: "b"}
-*/
+// identify : function that returns any data value unchanged...
+//  @param {any data value}: function takes in any value as input.
+// @return{any data value} : function returns the input value unchanged
 
-
-//  @param {data value} any :  this is simply a function returning the value unchanged
 function identify(value) {
     return value;
 }
 module.exports.identify = identify;
 
 
-//   @params{data value} any: this will return the data type of whatever is passed into the function
+
+// typeOf : function that will return the data type of the input value
+// @params{any value} : takes in any data value as input value.
+// @return{String}:return a string representing the data type of the input Value
 function typeOf(value) {
     if (typeof value === 'string' || value instanceof String) {
         return 'string';
@@ -73,11 +68,11 @@ function typeOf(value) {
 }
 module.exports.typeOf = typeOf;
 
-//   @params {array} array : what we will be checking in the function, we are getting the first 
-// element in the array .
 
-// @params {num} number : we will use this to manipulate the array, if the number is larger than the array,length
-// return the entire array.
+// first : function will return the index of the input array or the input array itself..
+// @params{Array} : function takes an array as the first argument
+// @params{NUM} : function takes a number as the second argument.
+// @return {Number,String, Array} : function will either return a number , a string, or the array
 
 
 function first(arr, num) {
@@ -107,9 +102,11 @@ function first(arr, num) {
 }
 module.exports.first = first;
 
+// last : function will be used to find the index of a input array starting from the last element
 
 // @params{array} array : checks the array and targets the lass elemet to return in the end
 // @params {num} number : the number that will be used to change what is removed from the array
+// @return {Number, array} : function will either return a number in the array or the entire array..
 
 function last (arr, num) {
     let newArr = [];
@@ -137,8 +134,10 @@ module.exports.last = last;
 
 
 
-// @params{array} array : checks the array and targets the lass elemet to return in the end
-// @params {value} number : this will be the number of index you will be checking..
+//  indexOf : function will be used to return the index of the input array
+// @params {Array}: function will iterate through the input array to declare the index
+// @params {Number} : function will use this input number to return the index 
+// @return {Number}: function will return the index of the input value..
 
 
    function indexOf(arr, value) {
@@ -153,12 +152,12 @@ module.exports.last = last;
 module.exports.indexOf = indexOf;
 
 
-  
-// *   1) Return true if <array> contains <value>
-// *   2) Return false otherwise
-
-// @params{array} array : checks the array and targets the lass elemet to return in the end
-// @params {value} number : this will be the NUMBER  will be checking..
+  /*
+    contains: function that takes an array and a value and returns boolean
+    @params {array}: function takes in a array as the first argument
+    @params {any simple data type} : function will iterate and check if the input value is inside of the array
+    @return {Boolean}: function will either return true or false..
+  */
 
 function contains(arr, value) {
     for (let i = 0; i < arr.length; i++) {
@@ -172,21 +171,24 @@ function contains(arr, value) {
   
 module.exports.contains = contains;
 
-// 1) Returns a new array of all elements from <array> with duplicates removed
-// @params array: the array you will be making UNIQUE..
 
+/*
+unique: function takes in array and returns a new array
+@params {Array}: function takes array  as input..
+@return {Array}: function returns array with no duplicates existing.
+*/
 function unique (arr) { return [...new Set(arr)]; }
 
 module.exports.unique = unique;
 
 
-// call <function> for each element in <array> passing the arguments:
-// *      the element, it's index, <array>
-// *   2) return a new array of elements for which calling <function> returned true
+/*
+filter : function takes in a array and function as input and returns new Array.
+@params {Array}: function takes array as input 
+@params {Function}: function will take another function as the second parameter
+@return {Array}: function will only return the element that registers true to the func parameter
 
-// @params arr: the array you will be running
-// @params function: the function that will dictate the filter..
-
+*/
 
  function filter (arr, func) {
   var fixedArr = [];
@@ -203,12 +205,12 @@ module.exports.unique = unique;
 module.exports.filter = filter;
 
 
-// 1) call <function> for each element in <array> passing the arguments:
-// *      the element, it's index, <array>
-// *   2) return a new array of elements for which calling <function> returned false
-
-// @params array: 
-// @params function : the inverse of the filter method..
+/*
+reject : function takes in an array and a function to return a new Array
+@params{Array}: function takes in array as first parameter;
+@params {Funcion}: function also takes in a function to be ran on the elements in array
+@return {Array} : function returns the values that are false from the function and puts them in a array.
+*/
 
 function reject (array, func) {
     let output = [];
@@ -221,33 +223,25 @@ function reject (array, func) {
   }
   module.exports.reject = reject;
 
-
-//   1) Call <function> for each element in <array> passing it the arguments:
-//   // *       element, key, <array>
-//   // *   2) Return an array that is made up of 2 sub arrays:
-//   // *       0) An array that contains all the values for which <function> returned something truthy
-//   // *       1) An array that contains all the values for which <function> returned something falsy
-
-// @params : array, function
+/*
+partition :  function takes in a array and function and returns two arrays;
+@params {Array} : function takes in a array as a input
+@params {Function} : function also takes in a function as a input.
+@return {Array, Array} : function returns an array of truthy values and another array of falsey values.
+*/
 
    function partition (arr, func) {
     return [_.filter(arr, func), _.reject(arr, func)];
   }
   module.exports.partition = partition;
 
-
-
-//   Objectives:
-// *   1) call <function> for each element in <collection> passing the arguments:
-// *        if <collection> is an array:
-// *            the element, it's index, <collection>
-// *        if <collection> is an object:
-// *            the value, it's key, <collection>
-// *   2) save the return value of each <function> call in a new array
-// *   3) return the new array
-
-
-// @params : collection, function..
+/*
+map : function takes in a collection and a function and returns a new Array
+@params : {collections} : function will either take a array or a object as a input
+@params {Function} : function will also take a function as a input.
+@return {Array}: function will return an array of the input function over the input array
+  returns new Array.
+*/
 
    function map (collec, func) {
     let output = [];
@@ -266,11 +260,13 @@ function reject (array, func) {
   }
   module.exports.map = map;
 
+/*
+pluck : function will take a array and a properties and will return a array
+@params : function will take a array as the input 
+@params : function will take a property as a input
+@retrun {Array} : function returns an array countaining the value of the prop parameter for every element in the array
+*/
 
-
-
-//   1)  pluck Returns an array containing the value of <property> for every element in <array>
-// @params arr, properties..
 
 function pluck(arr, prop) {
     return _.map(arr, function (i, index, arr) {
@@ -282,15 +278,12 @@ function pluck(arr, prop) {
 
 
 
-//   1) each wil Call <function> for every element of <collection> with the paramaters:
-// *      if <collection> is an array:
-// *          current element, it's index, <collection>
-// *      if <collection> is an object:
-// *          current value, current key, <collection>
-// *   2) If the return value of calling <function> for every element is true, return true
-// *   3) If even one of them returns false, return false
-// *   4) If <function> is not provided, return true if every element is truthy, otherwise return false
-// @params : collectio, function
+/*
+every : function will take in a collection and a function as inputs
+@params {Collection}: function will either take a array or an object as a input
+@params{Function}: function will also take in a function as a parameter
+@return {boolean} : function will only return true if al values are truthy within the function
+*/
 
  function every(collec, func) {
     let falseCount = 0;
@@ -317,14 +310,12 @@ function pluck(arr, prop) {
 
   module.exports.every = every;
 
-
-
-//   1) some will Call <function> for every element of <collection> with the paramaters:
-// *       if <collection> is an array:
-// *        current element, it's index, <collection>
-// *       if <collection> is an object:
-// *        current value, current key, <collection></collection>
- // @params collection , function
+ /*
+some : function that takes in a collection and a func to return a boolean
+@params {collection}: function will either take a array or object as a input
+@params {Function}: function also take a function to call on every element in the array
+@returns {boolean}: function will return false if all values are falsey else it will return true
+ */
 
   function some (coll, func) {
     let someSome = 0;
@@ -374,15 +365,14 @@ function pluck(arr, prop) {
   module.exports.some = some;
 
 
-//   1) reduce will Call <function> for every element in <collection> passing the arguments:
-// *         previous result, element, index
-// *   2) Use the return value of <function> as the "previous result"
-// *      for the next iteration
-// *   3) On the very first iteration, use <seed> as the "previous result"
-// *   4) If no <seed> was given, use the first element/value of <collection> as <seed> and continue to the next element
-// *   5) After the last iteration, return the return value of the final <function> call
-// @params collection, function, seed
+/*
+reduce: function that will take in a array, a function, and a seed.
+@params{Array} : function will take an  array as a input
+@params {Funciton}: function will take a function as a input
+@params {Seed}: function will either include seed parameter or not
+@return {any value}: function retruns the return value of  the final function
 
+*/
 
  function reduce (arr, func, seed) {
     var output;
@@ -404,10 +394,13 @@ function pluck(arr, prop) {
 module.exports.reduce = reduce;
 
 
-// 1) extend will Copy properties from <object 2> to <object 1>
-// *   2) If more objects are passed in, copy their properties to <object 1> as well, in the order they are passed in.
-// *   3) Return the update <object 1>
-// @params: object, another object
+
+/*
+extend : function will take a object and another object as inputs
+@params {Object}: function wil take an object as the first input
+@params{Object2}: function will take in another object as input
+@return {Object} : function will return object2 data inside of object1
+*/
 
  function extend (obj, ...props) {
     // map through to get all values fro ...props arg
